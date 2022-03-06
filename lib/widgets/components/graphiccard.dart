@@ -4,29 +4,41 @@ import 'package:draw_graph/models/feature.dart';
 
 class GraphicCard extends StatefulWidget {
   final String name;
-  const GraphicCard({Key? key, required this.name}) : super(key: key);
+  final List<String> labelX;
+  final List<String> labelY;
+  final String tempInterna;
+  final String tempExterna;
+  final List<Feature> features;
+  const GraphicCard({
+    Key? key,
+    required this.name,
+    required this.labelX,
+    required this.labelY,
+    required this.tempInterna,
+    required this.tempExterna,
+    required this.features,
+  }) : super(key: key);
 
   @override
   State<GraphicCard> createState() => _GraphicCardState();
 }
 
 class _GraphicCardState extends State<GraphicCard> {
-  List<Feature> features = [
-    Feature(
-      data: [0.35, 0.45, 0.28, 0.15, 0.2],
-      color: Colors.teal.shade600,
-      title: 'Temp. Interna (°C)',
-    ),
-    Feature(
-      data: [0.8, 0.95, 1, 0.78, 0.88],
-      color: Colors.amber.shade600,
-      title: 'Temp. Externa (°C)',
-    ),
-  ];
-  List<String> labelX = ['00h', '00h15', '00h30', '00h45', 'Agora'];
-  List<String> labelY = ['5°', '10°', '15°', '20°', '25°', '30°', '35°'];
-  String tempInterna = '15';
-  String tempExterna = '30';
+  List<Feature> features = [];
+  List<String> labelX = [];
+  List<String> labelY = [];
+  String tempInterna = '0';
+  String tempExterna = '0';
+
+  @override
+  initState() {
+    super.initState();
+    labelX = widget.labelX;
+    labelY = widget.labelY;
+    tempInterna = widget.tempInterna;
+    tempExterna = widget.tempExterna;
+    features = widget.features;
+  }
 
   @override
   Widget build(BuildContext context) {
