@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hemo_app/screens/homepage.dart';
+import 'package:hemo_app/widgets/screens/homepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
       initialRoute: '/',
       routes: {
