@@ -1,6 +1,7 @@
 import 'package:draw_graph/models/feature.dart';
 import 'package:flutter/material.dart';
 import 'package:hemo_app/widgets/components/graphiccard.dart';
+import 'package:hemo_app/widgets/screens/addmodule.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,7 +11,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
-        title: const Text('HEMO APP'),
+        title: const Text(
+          'HEMO APP',
+          style: TextStyle(
+            fontFamily: 'Fredoka',
+          ),
+        ),
+        centerTitle: true,
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(0, 9, 0, 9),
@@ -55,6 +62,16 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AddModule(),
+              ),
+            );
+          }),
     );
   }
 }

@@ -1,16 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:draw_graph/draw_graph.dart';
 import 'package:draw_graph/models/feature.dart';
-import 'package:hemo_app/widgets/screens/modulepage.dart';
+import 'package:flutter/material.dart';
 
-class GraphicCard extends StatefulWidget {
+class ModulePage extends StatefulWidget {
   final String name;
   final List<String> labelX;
   final List<String> labelY;
   final String tempInterna;
   final String tempExterna;
   final List<Feature> features;
-  const GraphicCard({
+  const ModulePage({
     Key? key,
     required this.name,
     required this.labelX,
@@ -21,10 +20,10 @@ class GraphicCard extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<GraphicCard> createState() => _GraphicCardState();
+  State<ModulePage> createState() => _ModulePageState();
 }
 
-class _GraphicCardState extends State<GraphicCard> {
+class _ModulePageState extends State<ModulePage> {
   List<Feature> features = [];
   List<String> labelX = [];
   List<String> labelY = [];
@@ -43,9 +42,18 @@ class _GraphicCardState extends State<GraphicCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.fromLTRB(18, 9, 18, 9),
-      child: Column(
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.chevron_left,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -81,7 +89,7 @@ class _GraphicCardState extends State<GraphicCard> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      tempInterna + '°C',
+                      widget.tempInterna + '°C',
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         fontSize: 32,
@@ -106,7 +114,7 @@ class _GraphicCardState extends State<GraphicCard> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      tempExterna + '°C',
+                      widget.tempExterna + '°C',
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         fontSize: 32,
@@ -145,45 +153,17 @@ class _GraphicCardState extends State<GraphicCard> {
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 6, 0, 18),
             child: LineGraph(
-              features: features,
+              features: widget.features,
               size: Size(
-                MediaQuery.of(context).size.width - 72,
+                MediaQuery.of(context).size.width - 36,
                 250,
               ),
-              labelX: labelX,
-              labelY: labelY,
+              labelX: widget.labelX,
+              labelY: widget.labelY,
               showDescription: true,
               graphColor: Colors.grey.shade500,
               graphOpacity: 0.1,
               fontFamily: 'Fredoka',
-            ),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 6, 12, 18),
-              child: OutlinedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ModulePage(
-                        name: widget.name,
-                        labelX: labelX,
-                        labelY: labelY,
-                        tempExterna: tempExterna,
-                        tempInterna: tempInterna,
-                        features: features,
-                      ),
-                    ),
-                  );
-                },
-                child: const Text(
-                  'Mais Informações',
-                  style: TextStyle(
-                    fontFamily: 'Fredoka',
-                  ),
-                ),
-              ),
             ),
           ),
         ],

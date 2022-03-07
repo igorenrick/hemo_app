@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hemo_app/widgets/screens/addmodule.dart';
 import 'package:hemo_app/widgets/screens/homepage.dart';
 
 void main() {
@@ -14,10 +15,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.teal,
+        fontFamily: 'Raleway',
       ),
       initialRoute: '/',
       routes: {
         '/': (context) => const HomePage(),
+        '/addModule': (context) => const AddModule(),
       },
     );
   }
